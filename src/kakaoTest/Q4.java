@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Q4 {
 
+	static int result;
+	
 	public static void main(String[] args) {
 		
 		StringBuilder sb = new StringBuilder();
@@ -19,60 +21,24 @@ public class Q4 {
         
         for(int i=0; i<numbers.length; i++) {
         	System.out.println(numbers[i]);
-        	long number = 8;
-        	int count = 2;
-        	int digit = 3;
-        	int result = 1;
+        	result = -1;
         	
-        	
-        	for(int j=0; j<5; j++) {
-        		if(j>0) {
-        			count *= 2;
-            		number *= Math.pow(2, count);
-            		digit += count;
+        	for(int j=1; j<10; j++) {
+        		int digit = (int)Math.pow(2, j) -1;
+        		
+        		String a = Long.toBinaryString(numbers[i]);
+        		if(a.length() > digit) {
+        			continue;
         		}
         		
-        		if(numbers[i] < number) {
-        			String a = Long.toBinaryString(numbers[i]);
-        			System.out.println(a);
-        			if(a.length() == digit || a.length() == digit -1) {
-        				int count2 = 0;
-        				for(int k=0; k<a.length(); k++) {
-        					if(a.length()%2 == 0) {
-        						if(k%2 == 0) {
-            						if(a.charAt(k) == '0') {
-            							
-            							result = 0;
-            							break;
-            						}
-            					}else {
-            						if(a.charAt(k) == '1') {
-            							count2++;
-            						}
-            					}
-        					}else {
-        						if(k%2 == 1) {
-            						if(a.charAt(k) == '0') {
-            							
-            							result = 0;
-            							break;
-            						}
-            					}else {
-            						if(a.charAt(k) == '1') {
-            							count2++;
-            						}
-            					}
-        					}
-        				}
-        				
-        				if(count2 == 0) {
-        					result = 0;
-        				}
-        			}else {
-        				result = 0;
+        		if(a.length() < digit) {
+        			for(int k=0; k<digit-a.length(); k++) {
+        				a = "0" + a;
         			}
-        			break;
         		}
+        		
+        		confirm(a, j, a.length()/2, 1);
+        		break;
         	}
         	
         	answer.add(result);
@@ -80,4 +46,29 @@ public class Q4 {
         
         return answer;
     }
+	
+	static void confirm(String a, int j, int now, int count) {
+		System.out.println(a + " " + j + " " + now + " " + count);
+		if(result == 0) {
+			return;
+		}
+		
+		if(j == count) {
+			if(a.charAt(now) == '1') {
+				result = 1;
+			}
+			return;
+		}
+		
+		if(a.charAt(now) == '1') {
+			confirm(a, j, now-(int)Math.pow(2, j-count-1), count+1);
+			confirm(a, j, now+(int)Math.pow(2, j-count-1), count+1);
+		}else {
+			for(int i=now-((int)Math.pow(2, j-count)-1); i<=now+((int)Math.pow(2, j-count)-1); i++) {
+				if(a.charAt(i) == '1') {
+					result = 0;
+				}
+			}
+		}
+	}
 }

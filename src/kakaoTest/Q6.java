@@ -32,6 +32,7 @@ public class Q6 {
         	}
         }
         
+        answer = result;
         return answer;
     }
 
@@ -55,31 +56,32 @@ public class Q6 {
 		if((Math.abs(x-r) + Math.abs(y-c)) + depth == k) {
 			String temp_new = temp;
 			
-			if(y > c) {
-				for(int i=0; i<y-c; i++) {
+			if(x > r) {
+				for(int i=0; i<x-r; i++) {
 					temp_new += "d";
 				}
 			}
 			
-			if(r < x) {
-				for(int i=0; i<x-r; i++) {
+			if(c < y) {
+				for(int i=0; i<y-c; i++) {
 					temp_new += "l";
 				}
 			}
 			
-			if(r > x) {
-				for(int i=0; i<r-x; i++) {
+			if(c > y) {
+				for(int i=0; i<c-y; i++) {
 					temp_new += "r";
 				}
 			}
 			
-			if(y < c) {
+			if(x < r) {
 				for(int i=0; i<r-x; i++) {
 					temp_new += "u";
 				}
 			}
 			
 			dfs(n, m, r, c, r, c, k, temp_new, k);
+			return;
 		}
 		
 		for(int i=0; i<4; i++) {
@@ -93,8 +95,14 @@ public class Q6 {
 			
 			int nx = x + dx[i];
 			int ny = y + dy[i];
-			String temp_new = temp + ds[i];
 			
+			if(nx == r && ny == c) {
+				nx = x;
+				ny = y;
+				continue;
+			}
+			
+			String temp_new = temp + ds[i];
 			
 			dfs(n, m, nx, ny, r, c, k, temp_new, depth+1);
 			if(!temp.equals(temp_new)) {
