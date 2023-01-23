@@ -1,4 +1,4 @@
-package level2;
+package src.level2;
 
 public class 숫자의_표현 {
     public int solution(int n) {

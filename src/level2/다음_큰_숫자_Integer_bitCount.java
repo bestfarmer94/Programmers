@@ -1,4 +1,4 @@
-package level2;
+package src.level2;
 
 // 비트로 변환한 후 1의 갯수를 세주는 함수.
 // 비트 관련이라 쓸 일이 있을지 모르겠다.

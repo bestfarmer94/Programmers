@@ -1,4 +1,4 @@
-package level2;
+package src.level2;
 
 public class 올바른_괄호 {
     boolean solution(String s) {

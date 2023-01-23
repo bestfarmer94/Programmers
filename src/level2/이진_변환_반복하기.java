@@ -1,4 +1,4 @@
-package level2;
+package src.level2;
 
 public class 이진_변환_반복하기 {
     public int[] solution(String s) {

@@ -1,4 +1,4 @@
-package level2;
+package src.level2;
 
 class JadenCase_문자열_만들기 {
     public String solution(String s) {
